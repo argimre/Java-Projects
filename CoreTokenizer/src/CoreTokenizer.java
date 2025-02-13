@@ -18,6 +18,14 @@ public class CoreTokenizer {
             } else if (token == 34) {
                 System.err.println("Error: Invalid token encountered.");
                 break;
+            } else if (token == 32) {
+                String idName = tokenizer.idName();
+                System.out.println("Token: " + token + " IdName: " + idName);
+                tokenizer.skipToken();
+            } else if (token == 31) {
+                int integer = tokenizer.intVal();
+                System.out.println("Token: " + token + " Integer: " + integer);
+                tokenizer.skipToken();
             } else {
                 System.out.println("Token: " + token);
                 tokenizer.skipToken();

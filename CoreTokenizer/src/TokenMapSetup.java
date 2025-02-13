@@ -5,7 +5,6 @@ public class TokenMapSetup {
     public Map<String, Integer> initializeTokenMap() {
         Map<String, Integer> tokenMap = new HashMap<>();
 
-        // Reserved words (1-11)
         tokenMap.put("program", 1);
         tokenMap.put("begin", 2);
         tokenMap.put("end", 3);
@@ -18,7 +17,6 @@ public class TokenMapSetup {
         tokenMap.put("read", 10);
         tokenMap.put("write", 11);
 
-        // Special symbols (12-30)
         tokenMap.put(";", 12);
         tokenMap.put(",", 13);
         tokenMap.put("=", 14);

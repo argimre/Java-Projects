@@ -27,6 +27,7 @@ public class Tokenizer {
             e.printStackTrace();
         }
         tokenizeLine();
+        System.out.println(tokens);
     }
 
     private void tokenizeLine() {
@@ -43,7 +44,6 @@ public class Tokenizer {
                     if (tokens.isEmpty()) {
                         break;
                     }
-                    System.out.println(tokens);
                 }
             }
         } catch (IOException e) {
@@ -52,58 +52,55 @@ public class Tokenizer {
     }
 
     private void parseTokens(String line) {
-        String[] strings = line.split(" ");
-
         int i = 0;
-        while (i < strings.length) {
-            String currentToken = strings[i];
-            if (tokenMap.containsKey(currentToken)) {
-                tokens.add(currentToken);
-                i++;
-            } else {
-                parseString(strings[i]);
-                i++;
-            }
-        }
-    }
+        while (i < line.length()) {
+            char currChar = line.charAt(i);
 
-    private void parseString(String currentToken) {
-        StringBuilder token = new StringBuilder();
-
-        int i = 0;
-        token.setLength(0);
-        char currChar = currentToken.charAt(i);
-
-        if (Character.isDigit(currChar)) {
-            while (i < currentToken.length() && Character.isDigit(currentToken.charAt(i))) {
-                token.append(currentToken.charAt(i));
+            if (Character.isWhitespace(currChar)) {
                 i++;
+                continue;
             }
 
-        } else if (Character.isLetter(currChar)) {
-            while (i < currentToken.length()
-                    && (Character.isUpperCase(currentToken.charAt(i)) || Character.isDigit(currentToken.charAt(i)))) {
-                token.append(currentToken.charAt(i));
+            String symbol = String.valueOf(currChar);
+            if (tokenMap.containsKey(symbol)) {
+                tokens.add(symbol);
                 i++;
-            }
-            String tokenString = token.toString();
-            if (tokenString.matches("[A-Z][A-Z0-9]*")) {
-                tokens.add(tokenString);
-            } else {
-                tokens.add("ERROR");
+                continue;
             }
 
-        } else {
-            token.setLength(0);
-            token.append(currChar);
-            if (tokenMap.containsKey(token.toString())) {
+            if (i < line.length() - 1) {
+                String twoCharSymbol = line.substring(i, i + 2);
+                if (tokenMap.containsKey(twoCharSymbol)) {
+                    tokens.add(twoCharSymbol);
+                    i += 2;
+                    continue;
+                }
+            }
+
+            if (Character.isLetter(currChar)) {
+                StringBuilder token = new StringBuilder();
+                while (i < line.length() && (Character.isLetterOrDigit(line.charAt(i)))) {
+                    token.append(line.charAt(i));
+                    i++;
+                }
                 tokens.add(token.toString());
-            } else {
-                System.err.println("Error: Unrecognized token '" + token + "' at position " + i);
-                tokens.add("ERROR");
+                continue;
             }
+
+            if (Character.isDigit(currChar)) {
+                StringBuilder token = new StringBuilder();
+                while (i < line.length() && Character.isDigit(line.charAt(i))) {
+                    token.append(line.charAt(i));
+                    i++;
+                }
+                tokens.add(token.toString());
+                continue;
+            }
+
+            System.err.println("Error: Unrecognized token '" + currChar + "'");
+            tokens.add("ERROR");
+            i++;
         }
-        i++;
     }
 
     public int getToken() {
