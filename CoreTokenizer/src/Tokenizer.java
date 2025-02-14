@@ -56,12 +56,18 @@ public class Tokenizer {
         int i = 0;
         while (i < line.length()) {
             char currChar = line.charAt(i);
+
             if (Character.isWhitespace(currChar)) {
                 i++;
                 continue;
             }
 
             String symbol = String.valueOf(currChar);
+            if (wordMap.containsKey(symbol) || symbolMap.containsKey(symbol)) {
+                tokens.add(symbol);
+                i++;
+                continue;
+            }
 
             if (i < line.length() - 1) {
                 String twoCharSymbol = line.substring(i, i + 2);
@@ -70,33 +76,6 @@ public class Tokenizer {
                     i += 2;
                     continue;
                 }
-            }
-
-            if (symbolMap.containsKey(symbol)) {
-                int nextIndex = i + 1;
-
-                while (nextIndex < line.length() && symbolMap.containsKey(String.valueOf(line.charAt(nextIndex)))) {
-                    String invalidSequence = line.substring(i, nextIndex + 1);
-
-                    if (symbolMap.containsKey(invalidSequence)) {
-                        tokens.add(invalidSequence);
-                        i = nextIndex + 1;
-                        break;
-                    }
-
-                    nextIndex++;
-                }
-
-                if (nextIndex > i + 1) {
-                    tokens.add("ERROR");
-                    System.err.println("Error: Invalid symbol sequence '" + line.substring(i, nextIndex) + "'");
-                    i = nextIndex;
-                    continue;
-                }
-
-                tokens.add(symbol);
-                i++;
-                continue;
             }
 
             if (Character.isLetter(currChar)) {
