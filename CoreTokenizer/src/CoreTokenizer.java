@@ -8,7 +8,6 @@ public class CoreTokenizer {
         String filePath = scanner.nextLine();
 
         Tokenizer tokenizer = new Tokenizer(filePath);
-
         while (true) {
             int token = tokenizer.getToken();
 

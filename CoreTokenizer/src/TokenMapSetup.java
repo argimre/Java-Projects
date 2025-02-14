@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TokenMapSetup {
-    public Map<String, Integer> initializeTokenMap() {
+    public Map<String, Integer> initializeWords() {
         Map<String, Integer> tokenMap = new HashMap<>();
 
         tokenMap.put("program", 1);
@@ -16,6 +16,12 @@ public class TokenMapSetup {
         tokenMap.put("loop", 9);
         tokenMap.put("read", 10);
         tokenMap.put("write", 11);
+
+        return tokenMap;
+    }
+
+    public Map<String, Integer> initializeSymbols() {
+        Map<String, Integer> tokenMap = new HashMap<>();
 
         tokenMap.put(";", 12);
         tokenMap.put(",", 13);
@@ -39,5 +45,4 @@ public class TokenMapSetup {
 
         return tokenMap;
     }
-
 }

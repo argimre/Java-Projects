@@ -3,20 +3,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Tokenizer {
     private TokenMapSetup tokenMapSetup = new TokenMapSetup();
     private BufferedReader reader;
-    private Map<String, Integer> tokenMap;
     private List<String> tokens;
     private int pointer;
 
+    private Map<String, Integer> wordMap;
+    private Map<String, Integer> symbolMap;
+
     public Tokenizer(String filePath) {
-        tokenMap = new HashMap<>();
-        tokenMap = tokenMapSetup.initializeTokenMap();
+        wordMap = tokenMapSetup.initializeWords();
+        symbolMap = tokenMapSetup.initializeSymbols();
         tokens = new ArrayList<>();
         pointer = 0;
 
@@ -62,7 +63,7 @@ public class Tokenizer {
             }
 
             String symbol = String.valueOf(currChar);
-            if (tokenMap.containsKey(symbol)) {
+            if (wordMap.containsKey(symbol) || symbolMap.containsKey(symbol)) {
                 tokens.add(symbol);
                 i++;
                 continue;
@@ -70,7 +71,7 @@ public class Tokenizer {
 
             if (i < line.length() - 1) {
                 String twoCharSymbol = line.substring(i, i + 2);
-                if (tokenMap.containsKey(twoCharSymbol)) {
+                if (symbolMap.containsKey(twoCharSymbol)) {
                     tokens.add(twoCharSymbol);
                     i += 2;
                     continue;
@@ -109,12 +110,14 @@ public class Tokenizer {
         }
 
         String token = tokens.get(pointer);
-
         if (token.equals("ERROR")) {
             return 34;
         }
-        if (tokenMap.containsKey(token)) {
-            return tokenMap.get(token);
+        if (wordMap.containsKey(token)) {
+            return wordMap.get(token);
+        }
+        if (symbolMap.containsKey(token)) {
+            return symbolMap.get(token);
         }
         if (token.matches("\\d+")) {
             return 31;
