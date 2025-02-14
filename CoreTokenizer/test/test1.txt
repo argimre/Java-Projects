@@ -1,0 +1,1 @@
+program PROGRAM arun int X2B1; begin X2B1 = 252; end a

@@ -79,13 +79,41 @@ public class Tokenizer {
             }
 
             if (Character.isLetter(currChar)) {
-                StringBuilder token = new StringBuilder();
-                while (i < line.length() && (Character.isLetterOrDigit(line.charAt(i)))) {
-                    token.append(line.charAt(i));
-                    i++;
+
+                if (Character.isLetter(currChar)) {
+
+                    if (Character.isUpperCase(currChar)) {
+                        StringBuilder token = new StringBuilder();
+                        boolean flag = true;
+                        while (i < line.length() && (Character.isLetterOrDigit(line.charAt(i)))) {
+                            if (Character.isUpperCase(line.charAt(i)) || Character.isDigit(line.charAt(i))) {
+                                token.append(line.charAt(i));
+                            } else {
+                                flag = false;
+                            }
+                            i++;
+                        }
+                        if (flag) {
+                            tokens.add(token.toString());
+                        } else {
+                            tokens.add("ERROR");
+                        }
+                        continue;
+                    } else {
+                        StringBuilder token = new StringBuilder();
+                        while (i < line.length() && (Character.isLetterOrDigit(line.charAt(i)))) {
+                            token.append(line.charAt(i));
+                            i++;
+                        }
+                        if (symbolMap.containsKey(token.toString()) || wordMap.containsKey(token.toString())) {
+                            tokens.add(token.toString());
+
+                        } else {
+                            tokens.add("ERROR");
+                        }
+                        continue;
+                    }
                 }
-                tokens.add(token.toString());
-                continue;
             }
 
             if (Character.isDigit(currChar)) {

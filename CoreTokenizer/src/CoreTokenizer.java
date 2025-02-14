@@ -12,9 +12,11 @@ public class CoreTokenizer {
             int token = tokenizer.getToken();
 
             if (token == 33) {
+                System.out.println("Token: " + token);
                 System.out.println("End of file reached.");
                 break;
             } else if (token == 34) {
+                System.out.println("Token: " + token);
                 System.err.println("Error: Invalid token encountered.");
                 break;
             } else if (token == 32) {
