@@ -1,0 +1,11 @@
+program int X; begin X = 25; if X != 10 then write X; else Y = 100; end
+program ABC123; int X1; begin while X1 < 100 write X1; end
+X2B1 = 200;
+invalidToken 123;
+ArunGhimire
+ARUN GHIMIRE
+A9A9A9A1123123123BVCDS12312312312312431243GDFEWF
+AB21312323111r5234324A
+program int Y; begin Y = 45; end
+int a = 25; program Test; write a;
+while loop != end

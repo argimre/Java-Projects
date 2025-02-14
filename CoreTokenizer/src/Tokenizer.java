@@ -143,7 +143,6 @@ public class Tokenizer {
                 tokens.add(token.toString());
                 continue;
             }
-
             System.err.println("Error: Unrecognized token '" + currChar + "'");
             tokens.add("ERROR");
             i++;

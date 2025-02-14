@@ -1,14 +1,12 @@
-import java.util.Scanner;
-
 public class CoreTokenizer {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
+        if (args.length < 1) {
+            System.err.println("Error: No file path provided.");
+            System.exit(1);
+        }
 
-        System.out.print("Enter the file path: ");
-        String filePath = scanner.nextLine();
-
+        String filePath = args[0];
         Tokenizer tokenizer = new Tokenizer(filePath);
-
         while (true) {
             int token = tokenizer.getToken();
 
@@ -33,6 +31,5 @@ public class CoreTokenizer {
                 tokenizer.skipToken();
             }
         }
-        scanner.close();
     }
 }
