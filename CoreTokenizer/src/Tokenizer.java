@@ -62,24 +62,44 @@ public class Tokenizer {
                 continue;
             }
 
-            String symbol = String.valueOf(currChar);
-            if (wordMap.containsKey(symbol) || symbolMap.containsKey(symbol)) {
-                tokens.add(symbol);
-                i++;
+            if (currChar == '&' && i + 1 < line.length() && line.charAt(i + 1) == '&') {
+                tokens.add("&&");
+                i += 2;
                 continue;
             }
 
-            if (i < line.length() - 1) {
-                String twoCharSymbol = line.substring(i, i + 2);
-                if (symbolMap.containsKey(twoCharSymbol)) {
-                    tokens.add(twoCharSymbol);
-                    i += 2;
-                    continue;
+            if (currChar == '|' && i + 1 < line.length() && line.charAt(i + 1) == '|') {
+                tokens.add("||");
+                i += 2;
+                continue;
+            }
+
+            StringBuilder operator = new StringBuilder();
+            while (i < line.length() && symbolMap.containsKey(String.valueOf(line.charAt(i)))) {
+                operator.append(line.charAt(i));
+                i++;
+            }
+
+            if (operator.length() > 2) {
+                System.err.println("Error: Invalid operator sequence '" + operator + "'");
+                tokens.add("ERROR");
+                continue;
+            }
+
+            if (operator.length() > 0) {
+                if (symbolMap.containsKey(operator.toString())) {
+                    tokens.add(operator.toString());
+                } else {
+                    tokens.add("ERROR");
                 }
+                if (i < line.length() && !Character.isWhitespace(line.charAt(i))) {
+                    System.err.println("Error: Operator '" + operator + "' must be followed by a space.");
+                    tokens.add("ERROR");
+                }
+                continue;
             }
 
             if (Character.isLetter(currChar)) {
-
                 if (Character.isLetter(currChar)) {
                     StringBuilder token = new StringBuilder();
                     if (Character.isUpperCase(currChar)) {
