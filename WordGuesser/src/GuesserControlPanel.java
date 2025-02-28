@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class ControlPanel {
+public class GuesserControlPanel {
     private JPanel gridPanel;
     private JTextField[][] grid;
     private int rows;
     private int cols;
     private WordGuesser wordGuesser;
 
-    public ControlPanel(JTextField[][] grid, int rows, int cols, WordGuesser wordGuesser) {
+    public GuesserControlPanel(JTextField[][] grid, int rows, int cols, WordGuesser wordGuesser) {
         this.grid = grid;
         this.rows = rows;
         this.cols = cols;

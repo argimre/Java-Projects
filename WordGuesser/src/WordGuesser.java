@@ -14,7 +14,7 @@ public class WordGuesser {
     private static List<String> wordList = new ArrayList<>();;
     private String selectedWord;
 
-    private ControlPanel controlPanel;
+    private GuesserControlPanel guesserControlPanel;
     private JTextField[][] grid;
     private JFrame frame;
 
@@ -62,9 +62,9 @@ public class WordGuesser {
         frame.setLayout(new BorderLayout());
 
         grid = new JTextField[rows][cols];
-        controlPanel = new ControlPanel(grid, rows, cols, this);
+        guesserControlPanel = new GuesserControlPanel(grid, rows, cols, this);
 
-        frame.add(controlPanel.getGridPanel(), BorderLayout.CENTER);
+        frame.add(guesserControlPanel.getGridPanel(), BorderLayout.CENTER);
         frame.setVisible(true);
 
     }
