@@ -91,7 +91,7 @@ public class SortVisualizer extends JPanel {
     public static void main(String[] args) throws Exception {
         JFrame frame = new JFrame("Sort Visualizer");
         SortVisualizer panel = new SortVisualizer();
-        ControlPanel controlPanel = new ControlPanel(panel);
+        SortControlPanel controlPanel = new SortControlPanel(panel);
 
         frame.add(panel, BorderLayout.CENTER);
         frame.add(controlPanel, BorderLayout.SOUTH);

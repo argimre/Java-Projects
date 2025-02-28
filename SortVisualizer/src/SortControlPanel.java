@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ControlPanel extends JPanel {
+public class SortControlPanel extends JPanel {
     private JComboBox<String> algorithmSelector;
     private SortVisualizer panel;
     private JButton startButton;
@@ -13,7 +13,7 @@ public class ControlPanel extends JPanel {
     private ISortingAlgorithm sorter;
     private final Map<String, ISortingAlgorithm> algorithms;
 
-    public ControlPanel(SortVisualizer panel) {
+    public SortControlPanel(SortVisualizer panel) {
         setLayout(new FlowLayout(FlowLayout.LEFT));
         this.panel = panel;
 
