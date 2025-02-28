@@ -27,6 +27,7 @@ public class WordGuesser {
         storeWords();
         selectWord();
         setFrame();
+        System.out.println(selectedWord);
     }
 
     private static void storeWords() {
@@ -149,6 +150,14 @@ public class WordGuesser {
         }
         grid[currentRow][currentColumn].setText("");
         grid[currentRow][currentColumn].requestFocus();
+    }
+
+    public int getCurrentRow() {
+        return this.currentRow;
+    }
+
+    public int getCurrentCol() {
+        return this.currentColumn;
     }
 
     public static void main(String[] args) throws Exception {

@@ -28,6 +28,7 @@ public class GuesserControlPanel {
                 grid[i][j].setHorizontalAlignment(JTextField.CENTER);
                 grid[i][j].setFont(new Font("Arial", Font.BOLD, 20));
                 grid[i][j].setEditable(i == 0);
+
                 grid[i][j].addKeyListener(new KeyAdapter() {
                     public void keyTyped(KeyEvent e) {
                         JTextField source = (JTextField) e.getSource();
@@ -48,7 +49,6 @@ public class GuesserControlPanel {
                             }
                         }
                     }
-
                 });
                 gridPanel.add(grid[i][j]);
             }
